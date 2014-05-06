@@ -1,0 +1,14 @@
+.container
+	%h1 Login
+
+	= form_tag sessions_path do
+		= label_tag :email
+		= text_field_tag :email, params[:email]
+		%br
+		=label_tag :password
+		=password_field_tag :password
+		%br
+		= submit_tag "Login"
+
+	%h2 Not Registered?
+	=link_to "Create an Account", new_user_path	

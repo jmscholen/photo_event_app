@@ -1,0 +1,13 @@
+.container.inline
+	%h1 Photos
+	- @photos.each do |t|
+		= image_tag t.image.url
+		%br
+		= t.name
+		%br
+		= t.description
+		%br
+		= t.price
+		$br
+		= link_to "Download Photo", download_image_photo_path(t)
+

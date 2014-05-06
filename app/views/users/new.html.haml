@@ -1,0 +1,20 @@
+.container
+	%h1 New User Form
+	= form_for @new_user, url: users_path, method: :post do |f|
+		= f.label :name
+		= f.text_field :name
+		%br
+		= f.label :type
+		= f.select :type, options_for_select("Buyer" => Buyer, "Photographer" => Photographer), include_blank: true
+		%br
+		= f.label :email
+		= f.email_field :email
+		%br
+		= f.label :password
+		= f.password_field :password
+		%br
+		= f.label :password_confirmation
+		= f.password_field :password_confirmation
+
+
+		= f.submit 'Sign-Up!'
