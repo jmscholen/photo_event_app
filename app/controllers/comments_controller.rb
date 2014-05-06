@@ -9,32 +9,35 @@ class CommentsController < ApplicationController
   end
 
   def create
-    @new_commment = Comment.new(params_for_comment)
+    @new_comment = Comment.new(comment_params)
+    if @new_comment.save
+      redirect_to photo_path(@new_comment.photo)
+    else
+      redirect_to :new
+    end
   end
 
   def edit
     @edit_comment = Comment.find(params[:id])
-    @edit_comment.update_attributes(params_for_comment)
-    redirect_to comments_path
   end
 
 
   def update
     @update_comment = Comment.find(params[:id])
-    @update_comment.update_attributes(params_for_comment)
+    @update_comment.update_attributes(comment_params)
     redirect_to comment_path
   end
 
   def destroy
     @delete_comment = Comment.find(params[:id])
-    @delete_comment.delete 
+    @delete_comment.destroy
     redirect_to comments_path
   end
 
   private
 
-  def params_for_comment
-    params.require(:comments).permit(:content)
+  def comment_params
+    params.require(:comment).permit(:content, :commentable_id, :commentable_type)
   end
 end
 

@@ -3,12 +3,12 @@ Rails.application.routes.draw do
   get "logout" => "sessions#destroy"
 
   resources :users
-  
-  resources :photos do
-    member do
-      get :download_image
-    end
-  end
+  resources :photos
+  # resources :photos do
+  #   member do
+  #     get :download_image
+  #   end
+  # end
 
   resources :comments
   resources :tags

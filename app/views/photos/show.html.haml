@@ -1,1 +1,10 @@
-show.html.haml
+.container
+	%h1 Photo Page
+	= @photo.name
+	= @photo.description
+	= @photo.price
+
+	=form_for @new_comment do |f|
+		=f.hidden_field :commentable_id, value: @new_comment.commentable_id 
+		=f.text_field :content
+		=f.submit "Add Comment"

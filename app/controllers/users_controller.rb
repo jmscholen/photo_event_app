@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
+  #skip_filter :ensure_logged_in
   def index
-    @users = User.new
+    @users = User.all
   end
 
   def new
@@ -8,7 +9,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    @new_user = User.new(params_for_user)
+    @new_user = User.new(user_params)
       if @new_user.save
         redirect_to photos_path, notice: "You are Signed Up!"
       else
@@ -19,13 +20,11 @@ class UsersController < ApplicationController
 
   def edit
     @edit_user = User.find(params[:id])
-    @edit_user.update_attributes(params_for_user)
-    redirect_to users_path
   end
 
   def update
     @edit_user = User.find(params[:id])
-    @edit_user.update_attributes(params_for_user)
+    @edit_user.update_attributes(user_params)
     redirect_to user_path
   end
 
@@ -37,7 +36,7 @@ class UsersController < ApplicationController
 
   private
 
-  def params_for_user
-    params.require(:user).permit(:name, :type, :email, :password)
+  def user_params
+    params.require(:user).permit(:name, :type, :email)# :password, :password_confirmation)
   end
 end

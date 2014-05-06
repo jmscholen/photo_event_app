@@ -1,0 +1,18 @@
+= form_for @new_user do |f|
+	= f.label :name
+	= f.text_field :name
+	%br
+	= f.label :type
+	= f.select :type, options_for_select("Buyer" => 1, "Photographer" => 2), include_blank: true
+	%br
+	= f.label :email
+	= f.email_field :email
+	%br
+	= f.label :password
+	= f.password_field :password
+	%br
+	= f.label :password_confirmation
+	= f.password_field :password_confirmation
+
+
+	= f.submit 'Add'
